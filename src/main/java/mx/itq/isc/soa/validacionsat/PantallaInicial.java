@@ -6,6 +6,7 @@ package mx.itq.isc.soa.validacionsat;
 
 import java.io.File;
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -14,6 +15,7 @@ import javax.swing.JFileChooser;
 public class PantallaInicial extends javax.swing.JFrame {
 
     String nombreArchivo = "";
+    File[] ficherosXML = null;
 
     /**
      * Creates new form PantallaInicial
@@ -46,11 +48,13 @@ public class PantallaInicial extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jToggleButton1 = new javax.swing.JToggleButton();
         jtUbicacionArchivo = new javax.swing.JTextField();
-        jToggleButton2 = new javax.swing.JToggleButton();
+        jTBExcel = new javax.swing.JToggleButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTAConsola = new javax.swing.JTextArea();
         jTBLimpiar = new javax.swing.JToggleButton();
         jToggleButton3 = new javax.swing.JToggleButton();
+        jtUbicacionXml = new javax.swing.JTextField();
+        jTBxml = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PROYECTO ISC - SOA 2023");
@@ -69,10 +73,10 @@ public class PantallaInicial extends javax.swing.JFrame {
             }
         });
 
-        jToggleButton2.setText("Iniciar Validacion");
-        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
+        jTBExcel.setText("Iniciar Validacion Excel");
+        jTBExcel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton2ActionPerformed(evt);
+                jTBExcelActionPerformed(evt);
             }
         });
 
@@ -99,6 +103,19 @@ public class PantallaInicial extends javax.swing.JFrame {
             }
         });
 
+        jtUbicacionXml.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtUbicacionXmlActionPerformed(evt);
+            }
+        });
+
+        jTBxml.setText("Iniciar Validacion XML");
+        jTBxml.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTBxmlActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -108,33 +125,43 @@ public class PantallaInicial extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jtUbicacionArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 682, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                        .addComponent(jtUbicacionArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 682, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(16, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
                                 .addComponent(jTBLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(16, Short.MAX_VALUE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTBExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTBxml, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtUbicacionXml, javax.swing.GroupLayout.PREFERRED_SIZE, 682, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, Short.MAX_VALUE)
-                    .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTBxml))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addComponent(jtUbicacionXml, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTBExcel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtUbicacionArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jToggleButton2)
-                    .addComponent(jTBLimpiar))
+                .addComponent(jTBLimpiar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -165,18 +192,58 @@ public class PantallaInicial extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtUbicacionArchivoActionPerformed
 
-    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
+    private void jTBExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTBExcelActionPerformed
         ValidacionSAT validador = new ValidacionSAT(this.jtUbicacionArchivo.getText(), this);
         validador.validarExcel(this.jtUbicacionArchivo.getText());
-    }//GEN-LAST:event_jToggleButton2ActionPerformed
+    }//GEN-LAST:event_jTBExcelActionPerformed
 
     private void jTBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTBLimpiarActionPerformed
-         this.jTAConsola.setText("");
+        this.jTAConsola.setText("");
     }//GEN-LAST:event_jTBLimpiarActionPerformed
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
-        // TODO add your handling code here:
+//        JFileChooser fileChooser = new JFileChooser();
+//        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+//        int seleccion = fileChooser.showOpenDialog(null);
+//        if (seleccion == JFileChooser.APPROVE_OPTION) {
+//            File fichero = fileChooser.getSelectedFile();
+//            System.out.println(" directorio: " + fichero.getAbsolutePath());
+//            this.jtUbicacionArchivo.setText(fichero.getAbsolutePath());
+//            nombreArchivo = fichero.getName();
+//        }
+
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fileChooser.setMultiSelectionEnabled(true); // Habilita la selección múltiple de archivos
+
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos XML", "xml");
+        fileChooser.setFileFilter(filter);
+        // Eliminar la opción "Todos los archivos" (All Files)
+        fileChooser.removeChoosableFileFilter(fileChooser.getAcceptAllFileFilter());
+
+
+        int seleccion = fileChooser.showOpenDialog(null);
+        if (seleccion == JFileChooser.APPROVE_OPTION) {
+             ficherosXML = fileChooser.getSelectedFiles();
+            for (File fichero : ficherosXML) {
+                System.out.println("Archivo seleccionado: " + fichero.getAbsolutePath());
+                // Puedes hacer lo que necesites con cada archivo, por ejemplo:
+                // this.jtUbicacionArchivo.setText(fichero.getAbsolutePath());
+                // nombreArchivo = fichero.getName();
+            }
+            if (ficherosXML != null) {
+                this.jtUbicacionXml.setText("NUMERO DE ARCHIVOS XML SELECCIONADOS = " + ficherosXML.length);
+            }
+        }
     }//GEN-LAST:event_jToggleButton3ActionPerformed
+
+    private void jtUbicacionXmlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtUbicacionXmlActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtUbicacionXmlActionPerformed
+
+    private void jTBxmlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTBxmlActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTBxmlActionPerformed
 
     /**
      * @param args the command line arguments
@@ -223,10 +290,12 @@ public class PantallaInicial extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTAConsola;
+    private javax.swing.JToggleButton jTBExcel;
     private javax.swing.JToggleButton jTBLimpiar;
+    private javax.swing.JToggleButton jTBxml;
     private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JToggleButton jToggleButton3;
     private javax.swing.JTextField jtUbicacionArchivo;
+    private javax.swing.JTextField jtUbicacionXml;
     // End of variables declaration//GEN-END:variables
 }
