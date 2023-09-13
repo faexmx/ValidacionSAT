@@ -18,7 +18,7 @@ public class CONEXION_SATF {
     public static void main(String[] args) {
         System.out.println("HOLA SOA!");
         PantallaInicial pantallaIni = new PantallaInicial();
-        pantallaIni.setSize(600,600);
+        pantallaIni.setSize(780,600);
         Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
         Dimension frame = pantallaIni.getSize();
         pantallaIni.setLocation((pantalla.width / 2 - (frame.width / 2)), pantalla.height / 2 - (frame.height / 2));
