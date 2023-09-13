@@ -8,7 +8,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
@@ -196,7 +198,7 @@ public class ValidacionSAT {
                     if (contadorCelda == 5) {
 
                         mapDatosSAT = obtencionEstatusSAT(rfcEmisor, rfcReceptor, total, uuid);
-                        this.pantalla.escribirConsola((contadorRenglon-1)
+                        this.pantalla.escribirConsola((contadorRenglon - 1)
                                 + " -  RFC EMISOR = " + rfcEmisor
                                 + ", RFC RECEPTOR = " + rfcReceptor
                                 + ", TOTAL = " + total
@@ -243,6 +245,79 @@ public class ValidacionSAT {
             e.printStackTrace();
         } finally {
             return resultadoProcesamiento;
+        }
+    }
+
+    public String validacionYCargaArchivosXML(File[] ficherosXML, String carpeta) {
+        List<HashMap> listaMapaDatosCFDIXML = new ArrayList();
+
+        for (File fichero : ficherosXML) {
+            System.out.println("Archivo seleccionado: " + fichero.getAbsolutePath());
+            CFDIParserXML parseadorCFDI = new CFDIParserXML();
+            HashMap mapaCFDI = parseadorCFDI.obtenerDatosXML(fichero.getAbsolutePath());
+            listaMapaDatosCFDIXML.add(mapaCFDI);
+        }
+
+        for (HashMap mapaCFDIXML : listaMapaDatosCFDIXML) {
+
+            HashMap mapaRespuestaSAT = obtencionEstatusSAT(mapaCFDIXML.get("RFCEMISOR").toString(),
+                    mapaCFDIXML.get("RFCRECEPTOR").toString(),
+                    mapaCFDIXML.get("TOTAL").toString(),
+                    mapaCFDIXML.get("UUID").toString());
+
+            // Juntar los dos mapas
+            mapaCFDIXML.putAll(mapaRespuestaSAT);
+        }
+
+        generaExcelAPartirDeCFIXML(listaMapaDatosCFDIXML, carpeta);
+        return "PPROCESO TERMINADO";
+    }
+
+    public void generaExcelAPartirDeCFIXML(List<HashMap> listaMapaDatosCFDIXML, String carpeta) {
+
+        try {
+            // Crear un nuevo Excel
+            Workbook workbook = new XSSFWorkbook();
+            // Crear una nueva hoja
+            Sheet sheet = workbook.createSheet("LISTADO CFDI");
+            // Crear encabezados
+            Row headerRow = sheet.createRow(0);
+            headerRow.createCell(0).setCellValue("RFC EMISOR");
+            headerRow.createCell(1).setCellValue("RFC EMISOR");
+            headerRow.createCell(2).setCellValue("TOTAL");
+            headerRow.createCell(3).setCellValue("UUID");
+            headerRow.createCell(4).setCellValue("FECHA");
+            headerRow.createCell(5).setCellValue("SERIE");
+            headerRow.createCell(6).setCellValue("FOLIO");
+            headerRow.createCell(7).setCellValue("RESPUESTA SAT PROCESO");
+            headerRow.createCell(8).setCellValue("ESTATUS CFDI ");
+            headerRow.createCell(9).setCellValue("ES CANCELABLE");
+            headerRow.createCell(10).setCellValue("ESTATUS CANCELACION");
+            headerRow.createCell(11).setCellValue("EFOS");
+
+            // Iterar sobre la lista de HashMaps
+            for (HashMap mapaCFDIXML : listaMapaDatosCFDIXML) {
+                // Iterar sobre el HashMap actual
+                // Crear una nueva fila
+                Row row = sheet.createRow(sheet.getLastRowNum() + 1);
+                row.createCell(0).setCellValue(mapaCFDIXML.get("RFCEMISOR").toString());
+                row.createCell(1).setCellValue(mapaCFDIXML.get("RFCRECEPTOR").toString());
+                row.createCell(2).setCellValue(mapaCFDIXML.get("TOTAL").toString());
+                row.createCell(3).setCellValue(mapaCFDIXML.get("UUID").toString());
+                row.createCell(4).setCellValue(mapaCFDIXML.get("FECHA").toString());
+                row.createCell(5).setCellValue(mapaCFDIXML.get("SERIE").toString());
+                row.createCell(6).setCellValue(mapaCFDIXML.get("FOLIO").toString());
+                row.createCell(7).setCellValue(mapaCFDIXML.get("ESTATUSPETICION").toString());
+                row.createCell(8).setCellValue(mapaCFDIXML.get("ES1TATUSCFDI").toString());
+                row.createCell(9).setCellValue(mapaCFDIXML.get("ESCANCELABLE").toString());
+                row.createCell(10).setCellValue(mapaCFDIXML.get("ESTATUSCANCELACION").toString());
+                row.createCell(11).setCellValue(mapaCFDIXML.get("VALIDACIONEFOS").toString());
+            }
+            FileOutputStream outputStream = new FileOutputStream(carpeta + "LISTADO_CLASE_CFDI.xlsx");
+            workbook.write(outputStream);
+            outputStream.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 

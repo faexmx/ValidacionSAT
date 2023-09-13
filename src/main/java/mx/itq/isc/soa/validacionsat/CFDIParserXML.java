@@ -16,10 +16,10 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-public class CFDIParser {
+public class CFDIParserXML {
 
     public static void main(String[] args) throws Exception {
-        CFDIParser cfdiParser = new CFDIParser();
+        CFDIParserXML cfdiParser = new CFDIParserXML();
         cfdiParser.obtenerDatosXML("D:/ITQ/PROYECTOS_NETBEANS/EJEMPLOS_CFDI/63851D4F-3F61-41CE-AF43-8235409953F0.xml");
     }
 
