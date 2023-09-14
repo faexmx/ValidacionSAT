@@ -8,7 +8,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import javax.net.ssl.HttpsURLConnection;
@@ -33,7 +35,8 @@ public class ValidacionSAT {
     String rutaArchivo = "";
     PantallaInicial pantalla = null;
 
-    public ValidacionSAT() {
+    public ValidacionSAT(PantallaInicial pantalla) {
+        this.pantalla = pantalla;
     }
 
     public ValidacionSAT(String rutaArchivo, PantallaInicial pantalla) {
@@ -47,7 +50,7 @@ public class ValidacionSAT {
         rfcReceptor = rfcReceptor.replaceAll("&", "&amp;");
         String respuestaPeticion = "SIN RESPUESTA DEL SAT";
         String cadenaPeticion = "?re=" + rfcEmisor + "&rr=" + rfcReceptor + "&tt=" + total + "&id=" + uuid;
-        ValidacionSAT operacionesWSValidacion = new ValidacionSAT();
+        ValidacionSAT operacionesWSValidacion = new ValidacionSAT(this.pantalla);
         Acuse acuseSAT = operacionesWSValidacion.consulta(cadenaPeticion);
         if (acuseSAT != null) {
             if (acuseSAT.getCodigoEstatus() != null) {
@@ -108,7 +111,7 @@ public class ValidacionSAT {
         rfcReceptor = rfcReceptor.replaceAll("&", "&amp;");
         String respuestaPeticion = "SIN RESPUESTA DEL SAT";
         String cadenaPeticion = "?re=" + rfcEmisor + "&rr=" + rfcReceptor + "&tt=" + total + "&id=" + uuid;
-        ValidacionSAT operacionesWSValidacion = new ValidacionSAT();
+        ValidacionSAT operacionesWSValidacion = new ValidacionSAT(this.pantalla);
         Acuse acuseSAT = operacionesWSValidacion.consulta(cadenaPeticion);
         if (acuseSAT != null) {
             if (acuseSAT.getCodigoEstatus() != null) {
@@ -296,6 +299,7 @@ public class ValidacionSAT {
             headerRow.createCell(11).setCellValue("EFOS");
 
             // Iterar sobre la lista de HashMaps
+            int contador = 1;
             for (HashMap mapaCFDIXML : listaMapaDatosCFDIXML) {
                 // Iterar sobre el HashMap actual
                 // Crear una nueva fila
@@ -307,15 +311,80 @@ public class ValidacionSAT {
                 row.createCell(4).setCellValue(mapaCFDIXML.get("FECHA").toString());
                 row.createCell(5).setCellValue(mapaCFDIXML.get("SERIE").toString());
                 row.createCell(6).setCellValue(mapaCFDIXML.get("FOLIO").toString());
-                row.createCell(7).setCellValue(mapaCFDIXML.get("ESTATUSPETICION").toString());
-                row.createCell(8).setCellValue(mapaCFDIXML.get("ES1TATUSCFDI").toString());
-                row.createCell(9).setCellValue(mapaCFDIXML.get("ESCANCELABLE").toString());
-                row.createCell(10).setCellValue(mapaCFDIXML.get("ESTATUSCANCELACION").toString());
-                row.createCell(11).setCellValue(mapaCFDIXML.get("VALIDACIONEFOS").toString());
+                if (mapaCFDIXML.get("ESTATUSPETICION") != null) {
+                    row.createCell(7).setCellValue(mapaCFDIXML.get("ESTATUSPETICION").toString());
+                } else {
+                    row.createCell(7).setCellValue("");
+                }
+                if (mapaCFDIXML.get("ES1TATUSCFDI") != null) {
+                    row.createCell(8).setCellValue(mapaCFDIXML.get("ES1TATUSCFDI").toString());
+                } else {
+                    row.createCell(8).setCellValue("");
+                }
+                if (mapaCFDIXML.get("ESCANCELABLE") != null) {
+                    row.createCell(9).setCellValue(mapaCFDIXML.get("ESCANCELABLE").toString());
+                } else {
+                    row.createCell(9).setCellValue("");
+                }
+                if (mapaCFDIXML.get("ESTATUSCANCELACION") != null) {
+                    row.createCell(10).setCellValue(mapaCFDIXML.get("ESTATUSCANCELACION").toString());
+                } else {
+                    row.createCell(10).setCellValue("");
+                }
+
+                if (mapaCFDIXML.get("VALIDACIONEFOS") != null) {
+                    row.createCell(11).setCellValue(mapaCFDIXML.get("VALIDACIONEFOS").toString());
+                } else {
+                    row.createCell(11).setCellValue("");
+                }
+
+                String cadenaExcel = contador + ".- ";
+                if (row != null) { // Verifica si la fila no es nula
+                    for (Cell cell : row) {
+                        switch (cell.getCellType()) {
+                            case STRING:
+                                System.out.print(cell.getStringCellValue() + " ");
+                                cadenaExcel = cadenaExcel + cell.getStringCellValue() + " ";
+                                break;
+                            case NUMERIC:
+                                System.out.print(cell.getNumericCellValue() + " ");
+                                cadenaExcel = cadenaExcel + cell.getNumericCellValue() + " ";
+                                break;
+                            case BOOLEAN:
+                                System.out.print(cell.getBooleanCellValue() + " ");
+                                cadenaExcel = cadenaExcel + cell.getBooleanCellValue() + " ";
+                                break;
+                            case BLANK:
+                                System.out.print("[BLANK]\t");
+                                cadenaExcel = cadenaExcel + "[BLANK] ";
+                                break;
+                            case ERROR:
+                                System.out.print("[ERROR]\t");
+                                cadenaExcel = cadenaExcel + "[ERROR] ";
+                                break;
+                            case FORMULA:
+                                System.out.print(cell.getCellFormula() + " ");
+                                cadenaExcel = cadenaExcel + cell.getCellFormula() + " ";
+                                break;
+                            default:
+                                System.out.print("[UNKNOWN] ");
+                                cadenaExcel = cadenaExcel + cell.getCellFormula() + "\t";
+                        }
+                    }
+                    System.out.println();
+                }
+                cadenaExcel = cadenaExcel + "\n";
+                this.pantalla.escribirConsola(cadenaExcel);
+                contador++;
+
             }
-            FileOutputStream outputStream = new FileOutputStream(carpeta + "LISTADO_CLASE_CFDI.xlsx");
+            Date fecha = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+            String fechaFormateada = sdf.format(fecha);
+            FileOutputStream outputStream = new FileOutputStream(carpeta + "/LISTADO_CLASE_CFDI_"+ fechaFormateada+ ".xlsx");
             workbook.write(outputStream);
             outputStream.close();
+            workbook.close();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -327,7 +396,7 @@ public class ValidacionSAT {
         rfcReceptor = rfcReceptor.replaceAll("&", "&amp;");
         String respuestaPeticion = "SIN RESPUESTA DEL SAT";
         String cadenaPeticion = "?re=" + rfcEmisor + "&rr=" + rfcReceptor + "&tt=" + total + "&id=" + uuid;
-        ValidacionSAT operacionesWSValidacion = new ValidacionSAT();
+        ValidacionSAT operacionesWSValidacion = new ValidacionSAT(this.pantalla);
         Acuse acuseSAT = operacionesWSValidacion.consulta(cadenaPeticion);
         if (acuseSAT != null) {
             if (acuseSAT.getCodigoEstatus() != null) {
