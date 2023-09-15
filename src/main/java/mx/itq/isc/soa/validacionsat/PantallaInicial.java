@@ -32,7 +32,7 @@ public class PantallaInicial extends javax.swing.JFrame {
         if (seleccion == JFileChooser.APPROVE_OPTION) {
             File fichero = fileChooser.getSelectedFile();
             System.out.println(" directorio: " + fichero.getAbsolutePath());
-            this.jtUbicacionArchivo.setText(fichero.getAbsolutePath());
+            this.jtUbicacionCarpertaResultadoExcelXML.setText(fichero.getAbsolutePath());
             ubicacionCarpetaExcel = fichero.getName();
         }
     }
@@ -55,10 +55,10 @@ public class PantallaInicial extends javax.swing.JFrame {
         jTBLimpiar = new javax.swing.JToggleButton();
         jtUbicacionXml = new javax.swing.JTextField();
         jToggleButton3 = new javax.swing.JToggleButton();
-        jtUbicacionArchivo = new javax.swing.JTextField();
+        jtUbicacionCarpertaResultadoExcelXML = new javax.swing.JTextField();
         jTBxml = new javax.swing.JToggleButton();
         jTBSeleccionarCarpetaExcel = new javax.swing.JToggleButton();
-        jtUbicacionArchivo1 = new javax.swing.JTextField();
+        jtUbicacionArchivoExcel = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PROYECTO ISC - SOA 2023");
@@ -111,10 +111,10 @@ public class PantallaInicial extends javax.swing.JFrame {
             }
         });
 
-        jtUbicacionArchivo.setText("D:\\");
-            jtUbicacionArchivo.addActionListener(new java.awt.event.ActionListener() {
+        jtUbicacionCarpertaResultadoExcelXML.setText("D:\\");
+            jtUbicacionCarpertaResultadoExcelXML.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jtUbicacionArchivoActionPerformed(evt);
+                    jtUbicacionCarpertaResultadoExcelXMLActionPerformed(evt);
                 }
             });
 
@@ -134,9 +134,9 @@ public class PantallaInicial extends javax.swing.JFrame {
                 }
             });
 
-            jtUbicacionArchivo1.addActionListener(new java.awt.event.ActionListener() {
+            jtUbicacionArchivoExcel.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jtUbicacionArchivo1ActionPerformed(evt);
+                    jtUbicacionArchivoExcelActionPerformed(evt);
                 }
             });
 
@@ -155,7 +155,7 @@ public class PantallaInicial extends javax.swing.JFrame {
                                     .addGap(18, 18, 18)
                                     .addComponent(jTBxml, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(jtUbicacionXml, javax.swing.GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
-                                .addComponent(jtUbicacionArchivo)
+                                .addComponent(jtUbicacionCarpertaResultadoExcelXML)
                                 .addComponent(jTBLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,7 +165,7 @@ public class PantallaInicial extends javax.swing.JFrame {
                                     .addComponent(jTBExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(jTBSeleccionarCarpetaExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(0, 0, Short.MAX_VALUE))
-                        .addComponent(jtUbicacionArchivo1, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)))
+                        .addComponent(jtUbicacionArchivoExcel, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)))
             );
             jPanel2Layout.setVerticalGroup(
                 jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,13 +179,13 @@ public class PantallaInicial extends javax.swing.JFrame {
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jTBSeleccionarCarpetaExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jtUbicacionArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtUbicacionCarpertaResultadoExcelXML, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jToggleButton1)
                         .addComponent(jTBExcel))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jtUbicacionArchivo1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                    .addComponent(jtUbicacionArchivoExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jTBLimpiar)
                     .addGap(18, 18, 18))
@@ -206,7 +206,7 @@ public class PantallaInicial extends javax.swing.JFrame {
                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(4, 4, 4)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -235,13 +235,13 @@ public class PantallaInicial extends javax.swing.JFrame {
         crearArchivoNuevo();
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
-    private void jtUbicacionArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtUbicacionArchivoActionPerformed
+    private void jtUbicacionCarpertaResultadoExcelXMLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtUbicacionCarpertaResultadoExcelXMLActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtUbicacionArchivoActionPerformed
+    }//GEN-LAST:event_jtUbicacionCarpertaResultadoExcelXMLActionPerformed
 
     private void jTBExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTBExcelActionPerformed
-        ValidacionSAT validador = new ValidacionSAT(this.jtUbicacionArchivo.getText(), this);
-        validador.validarExcel(this.jtUbicacionArchivo.getText());
+        ValidacionSAT validador = new ValidacionSAT(this.jtUbicacionCarpertaResultadoExcelXML.getText(), this);
+        validador.validarExcel(this.jtUbicacionCarpertaResultadoExcelXML.getText());
     }//GEN-LAST:event_jTBExcelActionPerformed
 
     private void jTBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTBLimpiarActionPerformed
@@ -288,17 +288,17 @@ public class PantallaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jtUbicacionXmlActionPerformed
 
     private void jTBxmlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTBxmlActionPerformed
-        if (jtUbicacionArchivo == null) {
+        if (jtUbicacionCarpertaResultadoExcelXML == null) {
             jTAConsola.setText("LA UBICACION DE LA CARPETA DONDE SE ALMACENARA EL EXCEL NO PUEDE SER NULA");
             return;
         }
-        if (jtUbicacionArchivo.getText().equals("")) {
+        if (jtUbicacionCarpertaResultadoExcelXML.getText().equals("")) {
             jTAConsola.setText("LA UBICACION DE LA CARPETA DONDE SE ALMACENARA EL EXCEL NO PUEDE SER NULA");
             return;
         }
         ValidacionSAT validador = new ValidacionSAT(this);
         jTAConsola.setText("");
-        validador.validacionYCargaArchivosXML(ficherosXML, jtUbicacionArchivo.getText());
+        validador.validacionYCargaArchivosXML(ficherosXML, jtUbicacionCarpertaResultadoExcelXML.getText());
     }//GEN-LAST:event_jTBxmlActionPerformed
 
     private void jTBSeleccionarCarpetaExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTBSeleccionarCarpetaExcelActionPerformed
@@ -308,14 +308,14 @@ public class PantallaInicial extends javax.swing.JFrame {
         if (seleccion == JFileChooser.APPROVE_OPTION) {
             File fichero = fileChooser.getSelectedFile();
             System.out.println("directorio: " + fichero.getAbsolutePath());
-            this.jtUbicacionArchivo.setText(fichero.getAbsolutePath());
+            this.jtUbicacionCarpertaResultadoExcelXML.setText(fichero.getAbsolutePath());
             ubicacionCarpetaExcel = fichero.getName();
         }
     }//GEN-LAST:event_jTBSeleccionarCarpetaExcelActionPerformed
 
-    private void jtUbicacionArchivo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtUbicacionArchivo1ActionPerformed
+    private void jtUbicacionArchivoExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtUbicacionArchivoExcelActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtUbicacionArchivo1ActionPerformed
+    }//GEN-LAST:event_jtUbicacionArchivoExcelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -369,8 +369,8 @@ public class PantallaInicial extends javax.swing.JFrame {
     private javax.swing.JToggleButton jTBxml;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton3;
-    private javax.swing.JTextField jtUbicacionArchivo;
-    private javax.swing.JTextField jtUbicacionArchivo1;
+    private javax.swing.JTextField jtUbicacionArchivoExcel;
+    private javax.swing.JTextField jtUbicacionCarpertaResultadoExcelXML;
     private javax.swing.JTextField jtUbicacionXml;
     // End of variables declaration//GEN-END:variables
 }

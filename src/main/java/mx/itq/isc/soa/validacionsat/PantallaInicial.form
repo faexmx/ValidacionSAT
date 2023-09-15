@@ -61,7 +61,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                  <Component id="jPanel2" min="-2" pref="243" max="-2" attributes="0"/>
+                  <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="278" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
@@ -113,7 +113,7 @@
                                       <Component id="jTBxml" min="-2" pref="226" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="jtUbicacionXml" alignment="0" pref="695" max="32767" attributes="0"/>
-                                  <Component id="jtUbicacionArchivo" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jtUbicacionCarpertaResultadoExcelXML" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jTBLimpiar" alignment="0" min="-2" pref="511" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -128,7 +128,7 @@
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jtUbicacionArchivo1" alignment="0" pref="689" max="32767" attributes="0"/>
+                          <Component id="jtUbicacionArchivoExcel" alignment="0" pref="689" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -146,14 +146,14 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jTBSeleccionarCarpetaExcel" min="-2" pref="26" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jtUbicacionArchivo" min="-2" max="-2" attributes="0"/>
+                      <Component id="jtUbicacionCarpertaResultadoExcelXML" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jToggleButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTBExcel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jtUbicacionArchivo1" min="-2" pref="23" max="-2" attributes="0"/>
+                      <EmptySpace pref="20" max="32767" attributes="0"/>
+                      <Component id="jtUbicacionArchivoExcel" min="-2" pref="23" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jTBLimpiar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
@@ -202,12 +202,12 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton3ActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="jtUbicacionArchivo">
+            <Component class="javax.swing.JTextField" name="jtUbicacionCarpertaResultadoExcelXML">
               <Properties>
                 <Property name="text" type="java.lang.String" value="D:\u005c" containsInvalidXMLChars="true"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtUbicacionArchivoActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtUbicacionCarpertaResultadoExcelXMLActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JToggleButton" name="jTBxml">
@@ -228,9 +228,9 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTBSeleccionarCarpetaExcelActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="jtUbicacionArchivo1">
+            <Component class="javax.swing.JTextField" name="jtUbicacionArchivoExcel">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtUbicacionArchivo1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtUbicacionArchivoExcelActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
