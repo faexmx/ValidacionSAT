@@ -5,9 +5,6 @@ package mx.itq.isc.soa.validacionsat;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import mx.sat.wsvalidacion.Acuse;
-import mx.sat.wsvalidacion.ConsultaCFDIService;
-import mx.sat.wsvalidacion.IConsultaCFDIService;
 
 /**
  *

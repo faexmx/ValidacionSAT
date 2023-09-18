@@ -167,6 +167,9 @@ public class ValidacionSAT {
             String rfcReceptor = "";
             String total = "";
             String uuid = "";
+            String fecha = "";
+            String serie = "";
+            String folio = "";
 
             for (Row row : sheet) {
                 contadorRenglon++;
@@ -197,8 +200,17 @@ public class ValidacionSAT {
                     if (contadorCelda == 4) {
                         uuid = cellValue;
                     }
-
                     if (contadorCelda == 5) {
+                        fecha = cellValue;
+                    }
+                    if (contadorCelda == 6) {
+                        serie = cellValue;
+                    }
+                    if (contadorCelda == 7) {
+                        folio = cellValue;
+                    }
+
+                    if (contadorCelda == 8) {
 
                         mapDatosSAT = obtencionEstatusSAT(rfcEmisor, rfcReceptor, total, uuid);
                         this.pantalla.escribirConsola((contadorRenglon - 1)
@@ -210,21 +222,21 @@ public class ValidacionSAT {
                         );
                     }
 
-                    if (contadorCelda == 5) {
+                    if (contadorCelda == 8) {
                         cell.setCellValue(mapDatosSAT.get("ESTATUSPETICION").toString());
                     }
 
                     if (mapDatosSAT.get("RESULTADO").toString().equals("S - Comprobante obtenido satisfactoriamente.")) {
-                        if (contadorCelda == 6) {
+                        if (contadorCelda == 9) {
                             cell.setCellValue(mapDatosSAT.get("ES1TATUSCFDI").toString());
                         }
-                        if (contadorCelda == 7) {
+                        if (contadorCelda == 10) {
                             cell.setCellValue(mapDatosSAT.get("ESCANCELABLE").toString());
                         }
-                        if (contadorCelda == 8) {
+                        if (contadorCelda == 11) {
                             cell.setCellValue(mapDatosSAT.get("ESTATUSCANCELACION").toString());
                         }
-                        if (contadorCelda == 9) {
+                        if (contadorCelda == 12) {
                             cell.setCellValue(mapDatosSAT.get("VALIDACIONEFOS").toString());
                         }
                     }
@@ -381,7 +393,7 @@ public class ValidacionSAT {
             Date fecha = new Date();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
             String fechaFormateada = sdf.format(fecha);
-            FileOutputStream outputStream = new FileOutputStream(carpeta + "/LISTADO_CLASE_CFDI_"+ fechaFormateada+ ".xlsx");
+            FileOutputStream outputStream = new FileOutputStream(carpeta + "/LISTADO_CLASE_CFDI_" + fechaFormateada + ".xlsx");
             workbook.write(outputStream);
             outputStream.close();
             workbook.close();

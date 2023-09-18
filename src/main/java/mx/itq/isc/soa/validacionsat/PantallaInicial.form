@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.8" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="title" type="java.lang.String" value="PROYECTO ISC - SOA 2023"/>
@@ -107,28 +111,33 @@
                           <Group type="102" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jToggleButton3" min="-2" pref="270" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jTBxml" min="-2" pref="226" max="-2" attributes="0"/>
-                                  </Group>
                                   <Component id="jtUbicacionXml" alignment="0" pref="695" max="32767" attributes="0"/>
                                   <Component id="jtUbicacionCarpertaResultadoExcelXML" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jTBLimpiar" alignment="0" min="-2" pref="511" max="-2" attributes="0"/>
                               </Group>
                           </Group>
+                          <Component id="jtUbicacionArchivoExcel" alignment="0" pref="689" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="jToggleButton1" min="-2" pref="270" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="jTBSeleccionarCarpetaExcel" alignment="0" min="-2" pref="514" max="-2" attributes="0"/>
+                                  <Component id="jTBLimpiar" alignment="0" min="-2" pref="511" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jTBArchivoExcel" min="-2" pref="270" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jTBExcel" min="-2" pref="231" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jTBSeleccionarCarpetaExcel" alignment="0" min="-2" pref="514" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jTBSelectorArchivosXML" min="-2" pref="270" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jTBIniciarValidacionXML" min="-2" pref="226" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jCBViaXML" min="-2" pref="193" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jCBViaExcel" min="-2" pref="193" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jtUbicacionArchivoExcel" alignment="0" pref="689" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -138,8 +147,13 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jTBxml" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jToggleButton3" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
+                          <Component id="jCBViaXML" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCBViaExcel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="8" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jTBSelectorArchivosXML" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
+                          <Component id="jTBIniciarValidacionXML" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jtUbicacionXml" min="-2" max="-2" attributes="0"/>
@@ -149,14 +163,13 @@
                       <Component id="jtUbicacionCarpertaResultadoExcelXML" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jToggleButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTBArchivoExcel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTBExcel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="20" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jtUbicacionArchivoExcel" min="-2" pref="23" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jTBLimpiar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -165,19 +178,21 @@
             <Component class="javax.swing.JToggleButton" name="jTBExcel">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Iniciar Validacion Excel"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTBExcelActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JToggleButton" name="jToggleButton1">
+            <Component class="javax.swing.JToggleButton" name="jTBArchivoExcel">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Seleccionar Archivo Excel"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="focusPainted" type="boolean" value="false"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTBArchivoExcelActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JToggleButton" name="jTBLimpiar">
@@ -193,13 +208,13 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtUbicacionXmlActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JToggleButton" name="jToggleButton3">
+            <Component class="javax.swing.JToggleButton" name="jTBSelectorArchivosXML">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Seleccionar Archivos CFDI XML"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton3ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTBSelectorArchivosXMLActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="jtUbicacionCarpertaResultadoExcelXML">
@@ -210,12 +225,12 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtUbicacionCarpertaResultadoExcelXMLActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JToggleButton" name="jTBxml">
+            <Component class="javax.swing.JToggleButton" name="jTBIniciarValidacionXML">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Iniciar Validacion XML"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTBxmlActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTBIniciarValidacionXMLActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JToggleButton" name="jTBSeleccionarCarpetaExcel">
@@ -229,8 +244,28 @@
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="jtUbicacionArchivoExcel">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtUbicacionArchivoExcelActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="jCBViaXML">
+              <Properties>
+                <Property name="selected" type="boolean" value="true"/>
+                <Property name="text" type="java.lang.String" value="Validacion via CFDI XML"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCBViaXMLActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="jCBViaExcel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Validacion via Excel"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCBViaExcelActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
