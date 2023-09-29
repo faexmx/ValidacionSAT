@@ -17,6 +17,12 @@ import mx.sat.wsvalidacion.Acuse;
 import mx.sat.wsvalidacion.ConsultaCFDIService;
 import mx.sat.wsvalidacion.IConsultaCFDIService;
 import org.apache.poi.ss.usermodel.Cell;
+import static org.apache.poi.ss.usermodel.CellType.BLANK;
+import static org.apache.poi.ss.usermodel.CellType.BOOLEAN;
+import static org.apache.poi.ss.usermodel.CellType.ERROR;
+import static org.apache.poi.ss.usermodel.CellType.FORMULA;
+import static org.apache.poi.ss.usermodel.CellType.NUMERIC;
+import static org.apache.poi.ss.usermodel.CellType.STRING;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -33,6 +39,9 @@ public class ValidacionSAT {
 
     public ValidacionSAT(PantallaInicial pantalla) {
         this.pantalla = pantalla;
+    }
+
+    public ValidacionSAT() {
     }
 
     public ValidacionSAT(String rutaArchivo, PantallaInicial pantalla) {
@@ -439,6 +448,122 @@ public class ValidacionSAT {
 
         mapDatosSAT.put("RESULTADO", respuestaPeticion);
         return mapDatosSAT;
+    }
+
+    public Workbook generaExcelAPartirDeCFDIXMLWEB(List<HashMap> listaMapaDatosCFDIXML) {
+
+        Workbook workbook = null;
+        try {
+            // Crear un nuevo Excel
+            workbook = new XSSFWorkbook();
+            // Crear una nueva hoja
+            Sheet sheet = workbook.createSheet("LISTADO CFDI");
+            // Crear encabezados
+            Row headerRow = sheet.createRow(0);
+            headerRow.createCell(0).setCellValue("RFC EMISOR");
+            headerRow.createCell(1).setCellValue("RFC EMISOR");
+            headerRow.createCell(2).setCellValue("TOTAL");
+            headerRow.createCell(3).setCellValue("UUID");
+            headerRow.createCell(4).setCellValue("FECHA");
+            headerRow.createCell(5).setCellValue("SERIE");
+            headerRow.createCell(6).setCellValue("FOLIO");
+            headerRow.createCell(7).setCellValue("RESPUESTA SAT PROCESO");
+            headerRow.createCell(8).setCellValue("ESTATUS CFDI ");
+            headerRow.createCell(9).setCellValue("ES CANCELABLE");
+            headerRow.createCell(10).setCellValue("ESTATUS CANCELACION");
+            headerRow.createCell(11).setCellValue("EFOS");
+
+            // Iterar sobre la lista de HashMaps
+            int contador = 1;
+            for (HashMap mapaCFDIXML : listaMapaDatosCFDIXML) {
+                // Iterar sobre el HashMap actual
+                // Crear una nueva fila
+                Row row = sheet.createRow(sheet.getLastRowNum() + 1);
+                row.createCell(0).setCellValue(mapaCFDIXML.get("RFCEMISOR").toString());
+                row.createCell(1).setCellValue(mapaCFDIXML.get("RFCRECEPTOR").toString());
+                row.createCell(2).setCellValue(mapaCFDIXML.get("TOTAL").toString());
+                row.createCell(3).setCellValue(mapaCFDIXML.get("UUID").toString());
+                row.createCell(4).setCellValue(mapaCFDIXML.get("FECHA").toString());
+                row.createCell(5).setCellValue(mapaCFDIXML.get("SERIE").toString());
+                row.createCell(6).setCellValue(mapaCFDIXML.get("FOLIO").toString());
+                if (mapaCFDIXML.get("ESTATUSPETICION") != null) {
+                    row.createCell(7).setCellValue(mapaCFDIXML.get("ESTATUSPETICION").toString());
+                } else {
+                    row.createCell(7).setCellValue("");
+                }
+                if (mapaCFDIXML.get("ES1TATUSCFDI") != null) {
+                    row.createCell(8).setCellValue(mapaCFDIXML.get("ES1TATUSCFDI").toString());
+                } else {
+                    row.createCell(8).setCellValue("");
+                }
+                if (mapaCFDIXML.get("ESCANCELABLE") != null) {
+                    row.createCell(9).setCellValue(mapaCFDIXML.get("ESCANCELABLE").toString());
+                } else {
+                    row.createCell(9).setCellValue("");
+                }
+                if (mapaCFDIXML.get("ESTATUSCANCELACION") != null) {
+                    row.createCell(10).setCellValue(mapaCFDIXML.get("ESTATUSCANCELACION").toString());
+                } else {
+                    row.createCell(10).setCellValue("");
+                }
+
+                if (mapaCFDIXML.get("VALIDACIONEFOS") != null) {
+                    row.createCell(11).setCellValue(mapaCFDIXML.get("VALIDACIONEFOS").toString());
+                } else {
+                    row.createCell(11).setCellValue("");
+                }
+
+                String cadenaExcel = contador + ".- ";
+                if (row != null) { // Verifica si la fila no es nula
+                    for (Cell cell : row) {
+                        switch (cell.getCellType()) {
+                            case STRING:
+                                System.out.print(cell.getStringCellValue() + " ");
+                                cadenaExcel = cadenaExcel + cell.getStringCellValue() + " ";
+                                break;
+                            case NUMERIC:
+                                System.out.print(cell.getNumericCellValue() + " ");
+                                cadenaExcel = cadenaExcel + cell.getNumericCellValue() + " ";
+                                break;
+                            case BOOLEAN:
+                                System.out.print(cell.getBooleanCellValue() + " ");
+                                cadenaExcel = cadenaExcel + cell.getBooleanCellValue() + " ";
+                                break;
+                            case BLANK:
+                                System.out.print("[BLANK]\t");
+                                cadenaExcel = cadenaExcel + "[BLANK] ";
+                                break;
+                            case ERROR:
+                                System.out.print("[ERROR]\t");
+                                cadenaExcel = cadenaExcel + "[ERROR] ";
+                                break;
+                            case FORMULA:
+                                System.out.print(cell.getCellFormula() + " ");
+                                cadenaExcel = cadenaExcel + cell.getCellFormula() + " ";
+                                break;
+                            default:
+                                System.out.print("[UNKNOWN] ");
+                                cadenaExcel = cadenaExcel + cell.getCellFormula() + "\t";
+                        }
+                    }
+                    System.out.println();
+                }
+                cadenaExcel = cadenaExcel + "\n";
+                System.out.println(cadenaExcel);
+                contador++;
+
+            }
+            Date fecha = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+            String fechaFormateada = sdf.format(fecha);
+            //FileOutputStream outputStream = new FileOutputStream(carpeta + "/LISTADO_CLASE_CFDI_" + fechaFormateada + ".xlsx");
+            //workbook.write(outputStream);
+            //outputStream.close();
+            //workbook.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return workbook;
     }
 
 }

@@ -5,6 +5,7 @@
 package mx.itq.isc.soa.validacionsat;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Vector;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -94,4 +95,63 @@ public class CFDIParserXML {
         }
 
     }
+
+    public HashMap obtenerDatosXMLViaImputStream(InputStream fileContent) {
+        // Leer el archivo XML
+        HashMap mapDatosSAT = new HashMap();
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            //File archivo = new File(ubicacionArchivo);
+            //Document document = builder.parse("D:/ITQ/PROYECTOS_NETBEANS/EJEMPLOS_CFDI/63851D4F-3F61-41CE-AF43-8235409953F0.xml");
+            Document document = builder.parse(fileContent);
+
+            // Validar el archivo XML
+//        SchemaFactory schemaFactory = SchemaFactory.newInstance(javax.xml.XMLConstants.W3C_XML_SCHEMA_NS_URI);
+//        Schema schema = schemaFactory.newSchema(new File("D:\\ITQ\\PROYECTOS_NETBEANS\\EJEMPLOS_CFDI\\cfdi33.xsd"));
+//        Validator validator = schema.newValidator();
+            // Obtener la información del archivo XML
+            Element root = document.getDocumentElement();
+
+            // RFC Emisor
+            String rfcEmisor = root.getElementsByTagName("cfdi:Emisor").item(0).getAttributes().getNamedItem("Rfc").getTextContent();
+            mapDatosSAT.put("RFCEMISOR", rfcEmisor);
+
+            // RFC Receptor
+            String rfcReceptor = root.getElementsByTagName("cfdi:Receptor").item(0).getAttributes().getNamedItem("Rfc").getTextContent();
+            mapDatosSAT.put("RFCRECEPTOR", rfcReceptor);
+
+            // Total
+            String total = root.getAttribute("Total");
+            mapDatosSAT.put("TOTAL", total);
+
+            // Total
+            String fecha = root.getAttribute("Fecha");
+            mapDatosSAT.put("FECHA", fecha);
+
+            // UUID
+            String uuid = root.getElementsByTagName("tfd:TimbreFiscalDigital").item(0).getAttributes().getNamedItem("UUID").getTextContent();
+            mapDatosSAT.put("UUID", uuid);
+
+            String serie = root.getAttribute("Serie");
+            mapDatosSAT.put("SERIE", serie);
+            String folio = root.getAttribute("Folio");
+            mapDatosSAT.put("FOLIO", folio);
+
+            // Imprimir la información
+            System.out.println("RFC Emisor: " + rfcEmisor);
+            System.out.println("RFC Receptor: " + rfcReceptor);
+            System.out.println("Total: " + total);
+            System.out.println("UUID: " + uuid);
+            System.out.println("FECHA EMISION: " + fecha);
+            System.out.println("Serie: " + serie);
+            System.out.println("Folio: " + folio);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            return mapDatosSAT;
+        }
+
+    }
+
 }
